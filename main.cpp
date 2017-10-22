@@ -1,4 +1,4 @@
-#include "Matrix.h"
+#include "EqLns.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -30,21 +30,40 @@ void fill3x3Matrix(Matrix& matrix)
 	matrix.getValue(2,2) = 5;
 }
 
+void fill4x4Matrix(Matrix& matrix)
+{
+	matrix.getValue(0,0) = 1;
+	matrix.getValue(0,1) = 2;
+	matrix.getValue(0,2) = 1;
+	matrix.getValue(0,3) = 6;
+	matrix.getValue(1,0) = 2;
+	matrix.getValue(1,1) = 8;
+	matrix.getValue(1,2) = 2;
+	matrix.getValue(1,3) = 6;
+	matrix.getValue(2,0) = 1;
+	matrix.getValue(2,1) = 2;
+	matrix.getValue(2,2) = 7;
+	matrix.getValue(2,3) = 9;
+	matrix.getValue(3,0) = 2;
+	matrix.getValue(3,1) = 7;
+	matrix.getValue(3,2) = 5;
+	matrix.getValue(3,3) = 4;
+}
+
 int main(int argc, char **argv)
 {
-	Matrix mat;
-	Matrix upper;
-	Matrix lower;
-
-	//fillRandomMatrix(upper);
-	//fillRandomMatrix(lower);
-	fill3x3Matrix(mat);
-	mat.printMatrix();
-	upper.printMatrix();
-	lower.printMatrix();
-	mat.diagMatrix(upper, lower);
-	std::cout << "upper final:\n";
-	upper.printMatrix();
-	std::cout << "lower final:\n";
-	lower.printMatrix();
+	EqLns matrix = EqLns(4);
+	Matrix b = Matrix(4, 1);
+	b.getValue(0,0) = 32;
+	b.getValue(1,0) = 48;
+	b.getValue(2,0) = 62;
+	b.getValue(3,0) = 47;
+	b.printMatrix();
+	Matrix x = Matrix(4, 1);
+	fill4x4Matrix(matrix);
+	std::cout << "matrix:\n";
+	matrix.printMatrix();
+	matrix.solve(b, x);
+	std::cout << "x:\n";
+	x.printMatrix();
 }

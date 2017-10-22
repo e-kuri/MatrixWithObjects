@@ -89,7 +89,6 @@ float Matrix::getDiagVal(Matrix& lower, Matrix& upper, int i, int j, int n, bool
 }
 
 void Matrix::diagMatrix(Matrix& upper, Matrix& lower){
-
     if(_m != _n){
         cout << "La matriz debe ser cuadrada para ser diagonalizable";
         return;
